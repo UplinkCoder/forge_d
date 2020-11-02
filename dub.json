@@ -1,0 +1,10 @@
+{
+	"authors": [
+		"Stefan Koch"
+	],
+	"copyright": "Copyright © 2020, Stefan Koch",
+	"description": "A binding to ArrayFire Forge",
+	"license": "Boost",
+	"name": "forge_d",
+    "libs" : ["forge"]
+}
