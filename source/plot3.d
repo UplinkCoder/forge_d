@@ -26,6 +26,21 @@ void map_range_to_vec_vbo(float range_start, float range_end, float dx,
     vec = vec[0 .. idx];
 }
 
+void setColor(fg_plot plot, uint rgba)
+{
+    uint r255 = (rgba >> 24) & 0xFF;
+    uint g255 = (rgba >> 16) & 0xFF;
+    uint b255 = (rgba >> 8)  & 0xFF;
+    uint a255 = (rgba >> 0)  & 0xFF;
+
+    float r = r255 / 255f;
+    float g = g255 / 255f;
+    float b = b255 / 255f;
+    float a = a255 / 255f;
+
+    fg_set_plot_color(plot, r, g, b, a);
+}
+
 int plot3() {
     import core.memory : GC;
     GC.disable();
@@ -91,18 +106,23 @@ int plot3() {
     /*
      * Set plot colors
      */
-/+
+
+    enum FG_RED =       0xff_00_00_ff;
+    enum FG_GREEN =       0x00_ff_00_ff;
+    enum FG_BLUE =      0x00_00_ff_ff;
+    enum FG_YELLOW =    FG_RED | FG_GREEN;
+
     plt0.setColor(FG_RED);
     plt1.setColor(FG_BLUE);
     plt2.setColor(FG_YELLOW);                 // use a forge predefined color
-    plt3.setColor((forge::Color)0x257973FF);  // or any hex-valued color
-+/
+    plt3.setColor(0x257973FF);  // or any hex-valued color
+
     /*
      * Set plot legends
      */
-    plt0.fg_set_plot_legend("Sine");
-    plt1.fg_set_plot_legend("Cosine");
-    plt2.fg_set_plot_legend("Tangent");
+    plt0.fg_set_plot_legend("Sine (red)");
+    plt1.fg_set_plot_legend("Cosine (blue)");
+    plt2.fg_set_plot_legend("Tangent (yellow)");
     plt3.fg_set_plot_legend("Log base 10");
 
     GfxHandle*[4] handles;
