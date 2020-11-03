@@ -36,7 +36,7 @@ import plot3;
 
 void main()
 {
-
+/+
     fg_window wnd;
     (&wnd).fg_create_window(1024, 768, "3d Surface Demo");
     wnd.fg_make_window_current();
@@ -93,5 +93,6 @@ void main()
 
 // TODO find out how to clean the context which seems to be screwed up.
 // and that's why it won't draw if you uncomment the line below
-//    plot3.plot3();
++/
+    plot3.plot3();
 }

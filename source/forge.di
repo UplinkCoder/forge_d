@@ -43,4 +43,3 @@ public import fg.surface;
 public import fg.histogram;
 public import fg.chart;
 
-

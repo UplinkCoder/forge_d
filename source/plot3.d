@@ -24,6 +24,7 @@ void map_range_to_vec_vbo(float range_start, float range_end, float dx,
     }
 
     vec = vec[0 .. idx];
+    printf("drawing %u points\n", idx);
 }
 
 void setColor(fg_plot plot, uint rgba)
@@ -42,15 +43,12 @@ void setColor(fg_plot plot, uint rgba)
 }
 
 int plot3() {
-    import core.memory : GC;
-    GC.disable();
-
     float[] sinData;
     float[] cosData;
     float[] tanData;
     float[] logData;
-    map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.1f, sinData, &sinf);
-    map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.1f, cosData, &cosf);
+    map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.01f, sinData, &sinf);
+    map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.01f, cosData, &cosf);
     map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.1f, tanData, &tanf);
     map_range_to_vec_vbo(FRANGE_START, FRANGE_END, 0.1f, logData, &log10f);
 
@@ -69,11 +67,12 @@ int plot3() {
    fg_chart chart;
    (&chart).fg_create_chart(fg_chart_type.FG_CHART_2D);
 
+   chart.fg_set_chart_axes_limits(FRANGE_START, FRANGE_END, -1.01f, 1.01f, 0, 0);
+
 
     // forge::Chart chart(FG_CHART_2D);
     // chart.setAxesLimits(FRANGE_START, FRANGE_END, -1.0f, 1.0f);
 
-    chart.fg_set_chart_axes_limits(FRANGE_START, FRANGE_END, -1.0f, 1.0f, 0, 0);
 
     char* msg;
     int len;
@@ -108,7 +107,7 @@ int plot3() {
      */
 
     enum FG_RED =       0xff_00_00_ff;
-    enum FG_GREEN =       0x00_ff_00_ff;
+    enum FG_GREEN =     0x00_ff_00_ff;
     enum FG_BLUE =      0x00_00_ff_ff;
     enum FG_YELLOW =    FG_RED | FG_GREEN;
 
