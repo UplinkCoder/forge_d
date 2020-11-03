@@ -52,7 +52,7 @@ int plot3() {
     // wnd.makeCurrent();
 
    fg_chart chart;
-   (&chart).fg_create_chart(fg_chart_type.FG_CHART_3D);
+   (&chart).fg_create_chart(fg_chart_type.FG_CHART_2D);
 
 
     // forge::Chart chart(FG_CHART_2D);
