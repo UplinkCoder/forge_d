@@ -6,5 +6,5 @@
 	"description": "A binding to ArrayFire Forge",
 	"license": "Boost",
 	"name": "forge_d",
-    "libs" : ["forge"]
+    "libs" : ["forge", "GL"]
 }

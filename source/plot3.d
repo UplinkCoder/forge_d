@@ -67,7 +67,7 @@ int plot3() {
    fg_chart chart;
    (&chart).fg_create_chart(fg_chart_type.FG_CHART_2D);
 
-   chart.fg_set_chart_axes_limits(FRANGE_START, FRANGE_END, -1.01f, 1.01f, 0, 0);
+   chart.fg_set_chart_axes_limits(FRANGE_START, FRANGE_END, -1.0f, 1.0f, 0, 0);
 
 
     // forge::Chart chart(FG_CHART_2D);
@@ -178,13 +178,14 @@ fg_get_last_error(&msg, &len);
 //    do { wnd.draw(chart); } while (!wnd.close());
 
     bool wnd_close = false;
-    do { wnd.fg_draw_chart(chart); fg_close_window(&wnd_close, wnd); fg_get_last_error(&msg, &len);
-    if (msg)
-    {
-        printf("err: %s\n", msg);
+    do { 
+        wnd.fg_draw_chart(chart); fg_close_window(&wnd_close, wnd); fg_get_last_error(&msg, &len);
+        if (msg)
+        {
+            printf("err: %s\n", msg);
+        }
     }
-}
-        while (!wnd_close);
+    while (!wnd_close);
 
 
     releaseGLBuffer(handles[0]);

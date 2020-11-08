@@ -34,11 +34,14 @@ void genSurface(float dx, ref float[] vec) {
 
 import plot3;
 
+extern (C) uint glGetError();
+extern (C) const (char)* glGetString(uint); 
+
 void main()
 {
 /+
     fg_window wnd;
-    (&wnd).fg_create_window(1024, 768, "3d Surface Demo");
+    (&wnd).fg_create_window(1920, 1080, "3d Surface Demo");
     wnd.fg_make_window_current();
 
     fg_chart chart;
@@ -77,6 +80,10 @@ void main()
     copyToGLBuffer(handle, cast(ComputeResourceHandle)f,
                    vert_buffer_size);
 
+
+    bool wnd_close = false;
+    wnd.fg_draw_chart(chart);
+    fg_save_window_framebuffer("test.png", wnd);
     char* msg;
     int len;
     fg_get_last_error(&msg, &len);
@@ -85,14 +92,19 @@ void main()
         printf("err: %s\n", msg);
     }
 
-    bool wnd_close = false;
     do { wnd.fg_draw_chart(chart); fg_close_window(&wnd_close, wnd); } 
         while (!wnd_close);
 
     releaseGLBuffer(handle);
+/+
+    auto gl_err = glGetError();
+    printf("gl_err: %s\n", glGetString(gl_err));
++/
 
+   fg_release_window(wnd);
 // TODO find out how to clean the context which seems to be screwed up.
 // and that's why it won't draw if you uncomment the line below
 +/
     plot3.plot3();
+
 }
